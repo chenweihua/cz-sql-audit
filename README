@@ -23,6 +23,16 @@ This module requires these other modules and libraries:
   Log::Dispatch
   Data::Dumper
 
+DOCUMENTATION
+
+Read more from the following lists:
+
+perldoc SQL::dbh
+perldoc SQL::Rewrite
+perldoc SQL::Explain
+perldoc SQL::Check
+perldoc SQL::Log::Record
+
 COPYRIGHT AND LICENCE
 
 Put the correct copyright and licence information here.
