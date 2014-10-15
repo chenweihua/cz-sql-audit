@@ -1,0 +1,12 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/SQL-dbh.t
+t/SQL-Rewrite.t
+t/SQL-Explain.t
+t/SQL-Log-Record.t
+lib/SQL/dbh.pm
+lib/SQL/Rewrite.pm
+lib/SQL/Explain.pm
+lib/SQL/Log/Record.pm
