@@ -208,12 +208,12 @@ Example:
                driver   => 'mysql',
         );
 
-        my $db_handle = $dblist->get_dbh('mybook66',{AutoCommit => 1});
-        my $sql = "select * from chapter where chapter_name like '第一%'  order by chapter_name asc limit 2";
+        my $db_handle = $dblist->get_dbh('test',{AutoCommit => 1});
+        my $sql = "select * from t2 where name like '第一%'  order by name asc limit 2";
         my $x = SQL::Explain->new();
         my $explain = $x->query_explain('dbh'=>$db_handle, 'query'=>$sql);
         $explain = $x->query_normalize($explain);
-        $x->query_index_use('database'=>'test', 'table'=>'chapter', 'query'=>$sql, 'explain'=>$explain);
+        $x->query_index_use('database'=>'test', 'table'=>'t2', 'query'=>$sql, 'explain'=>$explain);
         my $mark = $x->query_analyze('explain'=>$explain);
         $dblist->disconnect($db_handle);
 

@@ -379,18 +379,18 @@ Example:
 
     my $db_handle = $dblist->get_dbh('test',{AutoCommit => 1});
 
-    #my $sql = 'select * from chapter67 where cur_time = rand()';
-    #my $sql = "select * from chapter67 where chapter_name like '第一%'  order by chapter_name asc limit 2";
-    my $sql = "insert into chapter64 select * from chapter67 where chapter id > 100";
+    #my $sql = 'select * from t2 where cur_time = rand()';
+    #my $sql = "select * from t2 where name like '第一%'  order by name asc limit 2";
+    my $sql = "insert into t1 select * from t2 where chapter id > 100";
 
     print $sql,"\n";
     my $x = SQL::Check->new();
-    if ( $x->check_table('dbh'=>$db_handle, 'table'=>'chapter67') ) {
+    if ( $x->check_table('dbh'=>$db_handle, 'table'=>'t1') ) {
        my @message = $x->get_recommend($sql);
        #print Dumper(@message);
-       my $row = $x->get_table_status($db_handle, 'chapter67');
+       my $row = $x->get_table_status($db_handle, 't1');
        #print Dumper(@row);
-       my $engine = $x->get_engine($db_handle, 'chapter67');
+       my $engine = $x->get_engine($db_handle, 't1');
        print Dumper($engine);
     }
 
