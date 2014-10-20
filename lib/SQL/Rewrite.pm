@@ -235,7 +235,7 @@ sub query_statistic {
     my($self, $query) = @_; 
     print $query,"\n";
     $query =~ s{
-                  \s*?((?:(?:=|<|<=|>|>=)))\s*?
+                  \s*?((?:(?:=|<|<=|>|>=|LIKE)))\s*?
                   (?:'\w+?'|"\w+?"|\d+)\s*?
                }
                {   
