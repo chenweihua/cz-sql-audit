@@ -230,6 +230,66 @@ sub _short {
           . " items ... */"; 
 }
 
+# replace parameter with ?, for the memcached/redis cached.
+sub query_statistic {
+    my($self, $query) = @_; 
+    print $query,"\n";
+    $query =~ s{
+                  \s*?((?:(?:=|<|<=|>|>=)))\s*?
+                  (?:'\w+?'|"\w+?"|\d+)\s*?
+               }
+               {   
+                  _stat_comp($1)
+               }gmexsi;
+
+     $query =~ s{
+                   (\s*?BETWEEN\s*?\w+?\s*?AND\s*?\w+)
+                }
+                {
+                   _stat_range($1)
+                }gmexsi;
+
+     $query =~ s{
+                   \s+?((?:IN|VALUES))\s*
+                   \(
+                    \s*?(?:\d+|'.*?'|".*?")\s*?,.*?
+                   \)
+               }
+               {   
+                    _stat_in($1)
+               }gmexsi;
+
+     $query =~ s{
+                   \bLIMIT\b\s*?
+                   \d+\s*?(?:,\s*?\d+|)
+                }
+                {
+                   _stat_limit()
+                }gmexsi;
+
+    return $query;
+}
+
+sub _stat_comp {
+    my $mark = shift;
+    return " $mark ? "
+}
+
+sub _stat_range {
+    my $mark = shift;
+    print "mark: $mark\n";
+    return " BETWEEN ? AND ?";
+}
+
+sub _stat_in {
+    my $mark = shift;
+    return " $mark ( ? )"
+}
+
+sub _stat_limit {
+    return "LIMIT ?, ?";
+}
+
 sub _debug {
   my ($package, undef, $line ) = caller;
   @_ = map { (my $temp = $_) =~ s/\n/\n# /g; $temp }
