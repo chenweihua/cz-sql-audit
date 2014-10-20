@@ -451,6 +451,17 @@ the private function _short is used by short_query, return the retain items that
 _short
     Format and retrun the rest of the items.
 
+=item query_statistic
+
+Staticstic the similar sql, replace the parameter with ? mark, for example:
+
+    select * from t2 where name = 'list'
+    convert to
+    select * from t2 where name = ?
+
+As this feature, we can set this fuzzy sql as a key into redis or memcached, to avoid repeatable
+sql audit.
+
 =item _debug
 
 If the PTDEBUG is enabled, _debug function return the detailed information, such as package name, 
