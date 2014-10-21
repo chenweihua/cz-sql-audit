@@ -4,10 +4,15 @@ MANIFEST
 README
 t/SQL-Audit.t
 t/SQL-Audit-dbh.t
+t/SQL-Audit-Check.t
 t/SQL-Audit-Rewrite.t
 t/SQL-Audit-Explain.t
 t/SQL-Audit-Log-Record.t
+t/SQL-Audit-Email-Send.t
+lib/SQL/Audit.pm
 lib/SQL/Audit/dbh.pm
 lib/SQL/Audit/Rewrite.pm
+lib/SQL/Audit/Check.pm
 lib/SQL/Audit/Explain.pm
 lib/SQL/Audit/Log/Record.pm
+lib/SQL/Audit/Email/Send.pm
