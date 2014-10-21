@@ -7,7 +7,7 @@
 
 use Test::More tests => 3;
 BEGIN { 
-    use_ok('SQL::Log::Record');
+    use_ok('SQL::Audit::Log::Record');
     use_ok('Log::Dispatch');
 };
 
@@ -16,7 +16,7 @@ BEGIN {
 # Insert your test code below, the Test::More module is use()ed here so read
 # its man page ( perldoc Test::More ) for help writing this test script.
 
-my $log = SQL::Log::Record->new(
+my $log = SQL::Audit::Log::Record->new(
     'filename' => './audit.log',
     'mode'     => '>>',
     'screen'   => 1,

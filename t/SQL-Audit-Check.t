@@ -7,8 +7,8 @@
 
 use Test::More tests => 7;
 BEGIN { 
-    use_ok('SQL::dbh');
-    use_ok('SQL::Check');
+    use_ok('SQL::Audit::dbh');
+    use_ok('SQL::Audit::Check');
 };
 
 #########################
@@ -22,7 +22,7 @@ my $sql3 = 'select * from t2 where cur_time = now()';
 my $sql4 = 'select * from t2 order by rand()';
 my $sql5 = 'update t2 set name = uuid() where id = 100';
 
-my $x = SQL::Check->new();
+my $x = SQL::Audit::Check->new();
 
 ok( $x->get_recommend($sql1), qr/no where/i );
 ok( $x->get_recommend($sql2), qr/deterministic/i );

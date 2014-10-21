@@ -6,7 +6,7 @@
 # change 'tests => 1' to 'tests => last_test_to_print';
 
 use Test::More tests => 4;
-BEGIN { use_ok('SQL::Rewrite') };
+BEGIN { use_ok('SQL::Audit::Rewrite') };
 
 #########################
 
@@ -14,7 +14,7 @@ BEGIN { use_ok('SQL::Rewrite') };
 # its man page ( perldoc Test::More ) for help writing this test script.
 
 my $sql = 'delete from user where id > 100';
-my $ob = SQL::Rewrite->new();
+my $ob = SQL::Audit::Rewrite->new();
 
 ok ($ob->convert_to_select($sql), 'select * from user where id > 100');
 ok ($ob->short_query($sql, 20), 'select * from user where id > 100');

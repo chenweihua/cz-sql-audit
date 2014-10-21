@@ -6,7 +6,7 @@
 # change 'tests => 1' to 'tests => last_test_to_print';
 
 use Test::More tests => 3;
-BEGIN { use_ok('SQL::dbh') };
+BEGIN { use_ok('SQL::Audit::dbh') };
 require_ok( 'DBI' );
 
 #########################
@@ -15,7 +15,7 @@ require_ok( 'DBI' );
 # its man page ( perldoc Test::More ) for help writing this test script.
 
 ok (
-  SQL::dbh->new(
+  SQL::Audit::dbh->new(
       host => '127.0.0.1',
       port => 3306,
       user => 'test',

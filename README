@@ -27,11 +27,12 @@ DOCUMENTATION
 
 Read more from the following lists:
 
-perldoc SQL::dbh
-perldoc SQL::Rewrite
-perldoc SQL::Explain
-perldoc SQL::Check
-perldoc SQL::Log::Record
+perldoc SQL::Audit
+perldoc SQL::Audit::dbh
+perldoc SQL::Audit::Rewrite
+perldoc SQL::Audit::Explain
+perldoc SQL::Audit::Check
+perldoc SQL::Audit::Log::Record
 
 COPYRIGHT AND LICENCE
 

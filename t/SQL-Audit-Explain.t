@@ -7,8 +7,8 @@
 
 use Test::More tests => 3;
 BEGIN { 
-    use_ok('SQL::Explain');
-    use_ok('SQL::Rewrite');
+    use_ok('SQL::Audit::Explain');
+    use_ok('SQL::Audit::Rewrite');
 };
 
 #########################
@@ -17,10 +17,10 @@ BEGIN {
 # its man page ( perldoc Test::More ) for help writing this test script.
 
 my $sql = 'delete from user where id > 100';
-my $ob = SQL::Rewrite->new();
+my $ob = SQL::Audit::Rewrite->new();
 
 my $query = $ob->convert_to_select($sql);
-my $eo = SQL::Explain->new();
+my $eo = SQL::Audit::Explain->new();
 
 sub explain {
     my $query = shift;
