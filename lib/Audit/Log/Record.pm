@@ -1,4 +1,4 @@
-package SQL::Log::Record;
+package SQL::Audit::Log::Record;
 
 use strict;
 use warnings;
@@ -20,7 +20,7 @@ require Exporter;
 @ISA = qw(Exporter);
 @EXPORT    = qw( debug info notice warning error critical alert emergency );
 @EXPORT_OK = qw( log );
-$VERSION = '0.0.1';
+$VERSION = '0.1.0';
 
 sub filename {
     my $self = shift;
@@ -168,8 +168,8 @@ sub _debug {
 
 =head1 NAME
 
-  SQL::Log::Record - Wrap the Log::Dispatch and log message with a readable format, timestamp and 
-                    level info was added.
+  SQL::Audit::Log::Record - Wrap the Log::Dispatch and log message with a readable format, timestamp 
+                            and level info was added.
 
 =head1 REQUIRES
 
@@ -181,7 +181,7 @@ sub _debug {
 
 Examples:
 
-    use SQL::Log::Record;
+    use SQL::Audit::Log::Record;
 
     my $log = SQL::Log::Record->new(
         'filename' => './log/audit.log',
@@ -214,7 +214,7 @@ Log::Dispatch cannot be used. common use of this module provide following method
 
 =head2 new ([ ARGS ])
 
-Create a C<SQL::Log::Record>. filename, mode and screen can be provided which is optinal.
+Create a C<SQL::Audit::Log::Record>. filename, mode and screen can be provided which is optinal.
 
 =over 4
 
@@ -276,6 +276,6 @@ zhe.chen <chenzhe07@gmail.com>
 
 =head1 CHANGELOG
 
-v0.0.1 initial version
+v0.1.0 version
 
 =cut

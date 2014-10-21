@@ -1,4 +1,4 @@
-package SQL::Explain;
+package SQL::Audit::Explain;
 # This module provide some method for us to get the explain query result, it heavily
 # relay on the SQL Optimizer which supply the EXPLAIN mechanism. Other more detailed
 # rules can be set in query_analyze method.
@@ -19,7 +19,7 @@ require Exporter;
 @ISA = qw(Exporter);
 @EXPORT    = qw( query_explain query_normalize query_analyze );
 @EXPORT_OK = qw( query_index_use );
-$VERSION = '0.0.1';
+$VERSION = '0.1.0';
 
 sub new {
     my ( $class, %args ) = @_;
@@ -189,17 +189,17 @@ sub _debug {
 
 =head1 Name
 
-    SQL::Explain -- Explain the select clause to get the detailed execute plain, then can 
-                    find this query whether used suitable key or not.
+    SQL::Audit::Explain -- Explain the select clause to get the detailed execute plain, then can 
+                           find this query whether used suitable key or not.
 
 =head1 SYNOPSIS
 
 Example:
 
-        use SQL::dbh;
-        use SQL::Explain;
+        use SQL::Audit::dbh;
+        use SQL::Audit::Explain;
         use encoding "utf8";
-        my $dblist = SQL::dbh->new(
+        my $dblist = SQL::Audit::dbh->new(
                host => '127.0.0.1',
                port => 3306,
                user => 'test',
@@ -230,7 +230,7 @@ explain the non-select clause.
 
 =head2 new()
 
-Create a C<SQL::Explain>. No ARGS should be provided.
+Create a C<SQL::Audit::Explain>. No ARGS should be provided.
 
 =head2 FUNCTIONS
 
@@ -243,7 +243,7 @@ It's the basis method, there are two things that operate:
     2. Return the database handle which contains the EXPLAIN result;
 
 As these features, dbh(database handle) and SQL query should be provided. Args can be hash format:
-    eg: SQL::Explain->query_explain('dbh'=>$db_handle, 'query'=>$sql);
+    eg: SQL::Audit::Explain->query_explain('dbh'=>$db_handle, 'query'=>$sql);
 
 =item query_normalize
 
@@ -298,6 +298,6 @@ zhe.chen <chenzhe07@gmail.com>
 
 =head1 CHANGELOG
 
-v0.0.1 initial version
+v0.1.0 version
 
 =cut

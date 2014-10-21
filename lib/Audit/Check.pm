@@ -1,4 +1,4 @@
-package SQL::Check;
+package SQL::Audit::Check;
 # Two parts consists the check module: check table and check query.
 # the table status (no rows in table, table not exists, table status etc..) is
 # necessary to check because of developer maybe spell mistake the table name;
@@ -21,7 +21,7 @@ require Exporter;
 @ISA = qw(Exporter);
 @EXPORT    = qw( check_table get_engine get_table_status get_recommend);
 @EXPORT_OK = qw( _nondeter_clause _unsafe_parse _function_in_filter);
-$VERSION = '0.0.1';
+$VERSION = '0.1.0';
 
 sub new {
     my ( $class, %args ) = @_; 
@@ -357,18 +357,18 @@ sub _debug {
 
 =head1 Name
 
-    SQL::Check -- Check table whether is avalible or not, and detect the queries is normal
-                  because developer maybe use unsafe funtions or non-determitation clause.
+    SQL::Audit::Check -- Check table whether is avalible or not, and detect the queries is normal
+                         because developer maybe use unsafe funtions or non-determitation clause.
 
 =head1 SYNOPSIS
 
 Example:
 
-    use SQL::dbh;
+    use SQL::Audit::dbh;
     use Data::Dumper;
-    use SQL::Check;
+    use SQL::Audit::Check;
     use encoding "utf8";
-    my $dblist = SQL::dbh->new(
+    my $dblist = SQL::Audit::dbh->new(
         host => '127.0.0.1',
         port => 3306,
         user => 'test',
@@ -384,7 +384,7 @@ Example:
     my $sql = "insert into t1 select * from t2 where chapter id > 100";
 
     print $sql,"\n";
-    my $x = SQL::Check->new();
+    my $x = SQL::Audit::Check->new();
     if ( $x->check_table('dbh'=>$db_handle, 'table'=>'t1') ) {
        my @message = $x->get_recommend($sql);
        #print Dumper(@message);
@@ -408,7 +408,7 @@ detect queries is ok. Some unsafe factor can be collect and join in privite meth
 
 =head2 new()
 
-Create a C<SQL::Check>. No ARGS should be provided.
+Create a C<SQL::Audit::Check>. No ARGS should be provided.
 
 =head2 FUNCTIONS
 
@@ -425,7 +425,7 @@ As the above reasons, this method should at least provide dbh and table.
 
 example:
  
-    SQL::Check->check_table('dbh'=>$db_handle, 'table'=>'test_table');
+    SQL::Audit::Check->check_table('dbh'=>$db_handle, 'table'=>'test_table');
 
 =item get_engine
 
@@ -433,7 +433,7 @@ To get the table engine, Innodb engine is recommended. the following private met
 dbh and table name is needed.
 
 example:
-    my $engine = SQL::Check->get_engine('dbh'=>$db_hanle, 'table'=>'test_table');
+    my $engine = SQL::Audit::Check->get_engine('dbh'=>$db_hanle, 'table'=>'test_table');
 
 =item get_table_status
 
@@ -441,7 +441,7 @@ To get the common table status used by 'show table status like "table_name"', re
 dbh and table name is needed.
 
 example:
-    my $status = SQL::Check->get_table_status('dbh'=>$db_handle, 'table'=>'test_table');
+    my $status = SQL::Audit::Check->get_table_status('dbh'=>$db_handle, 'table'=>'test_table');
     use Data::Dumper;
     print Dumper($status);
 
@@ -521,6 +521,6 @@ zhe.chen <chenzhe07@gmail.com>
 
 =head1 CHANGELOG
 
-v0.0.1 initial version
+v0.1.0 version
 
 =cut

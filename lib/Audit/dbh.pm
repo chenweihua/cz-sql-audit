@@ -1,4 +1,4 @@
-package SQL::dbh;
+package SQL::Audit::dbh;
 
 # This program is part of SQL audit: get the database handle because of the different 
 # database which user use, and this database handle object should be destroy when leave 
@@ -19,7 +19,7 @@ $Data::Dumper::Quotekeys = 0;
 require Exporter;
 @ISA = qw(Exporter);
 @EXPORT    = qw( get_dbh disconnect );
-$VERSION = '0.0.1';
+$VERSION = '0.1.0';
 
 eval {
     require DBI;
@@ -213,15 +213,15 @@ sub print_active_handles {
 
 =head1 NAME
 
-  SQL::dbh - Get the database handle which is specified by script.
+  SQL::Audit::dbh - Get the database handle which is specified by script.
 
 =head1 SYNOPSIS
 
 Examples:
 
-      use SQL::dbh;
+      use SQL::Audit::dbh;
 
-      my $dblist = SQL::dbh->new(
+      my $dblist = SQL::Audit::dbh->new(
           host     => '127.0.0.1',
           port     => 3306,
           user     => 'username',
@@ -251,7 +251,7 @@ check whether the specified database is exists or not.
 
 =head2 new ([ ARGS ])
 
-Create a C<SQL::dbh>. host, port, user, password must be provided, script will
+Create a C<SQL::Audit::dbh>. host, port, user, password must be provided, script will
 be die if lack of one.
 
 You can pass several parameters to new:
@@ -303,6 +303,6 @@ zhe.chen <chenzhe07@gmail.com>
 
 =head1 CHANGELOG
 
-v0.0.1 initial version
+v0.1.0 version
 
 =cut

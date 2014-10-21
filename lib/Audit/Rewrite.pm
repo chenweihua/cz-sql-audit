@@ -1,4 +1,4 @@
-package SQL::Rewrite;
+package SQL::Audit::Rewrite;
 # Prior to 5.6, MySQL explain query does not support insert, update, delete clause,
 # it means we must rewrite these clause who change the data to select query, then
 # implement the explain prepare. both DBI and DBD::mysql is no needed.
@@ -13,7 +13,7 @@ use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 require Exporter;
 @ISA = qw(Exporter);
 @EXPORT    = qw(convert_to_select convert_select_list sub_query_wrap cut_comment short_query);
-$VERSION = '0.0.1';
+$VERSION = '0.1.0';
 
 # All changed sql maybe contains the following header, include combind query.
 my $query_keys = qr#INSERT|UPDATE|DELETE|REPLACE|SELECT#xi;
@@ -309,18 +309,18 @@ sub _debug {
 
 =head1 Name
 
-    SQL::Rewrite - Rewrite the insert, update, delete that related to change data to 
-                   select queries.
+    SQL::Audit::Rewrite - Rewrite the insert, update, delete that related to change data to 
+                          select queries.
 
 =head1 SYNOPSIS
 
 Example:
 
-    use SQL::Rewrite;
+    use SQL::Audit::Rewrite;
     my $sql = 'update book set book_id = 1002, name = "list", chapter_num = 100 where 
                book_id = 1003';
 
-    my $ob = SQL::Rewrite->new();
+    my $ob = SQL::Audit::Rewrite->new();
     my $query = $ob->convert_to_select($sql);
     print "Query: $query\n";
 
@@ -344,7 +344,7 @@ the regular expressions, so it's not easy to be found some minor mistakes.
 
 =head2 new()
 
-Create a C<SQL::Rewrite>. No ARGS should be provided.
+Create a C<SQL::Audit::Rewrite>. No ARGS should be provided.
 
 =head2 FUNCTIONS
  
@@ -439,12 +439,12 @@ short_query function, 20 items is remaining by default. for example:
 
 short_query need the length args to judge whether to short or not, and only short IN list query:
 
-    my $ob = SQL::Rewrite->new();
+    my $ob = SQL::Audit::Rewrite->new();
     my $query = $ob->short_query($sql, 20);
 
     the two statement above and the following statement is the same effect:
 
-    my $query = SQL::Rewrite->($sql, 20)   # 20 is the length parameter.
+    my $query = SQL::Audit::Rewrite->($sql, 20)   # 20 is the length parameter.
 
 the private function _short is used by short_query, return the retain items that had been shortened
 
@@ -479,6 +479,6 @@ zhe.chen <chenzhe07@gmail.com>
 
 =head1 CHANGELOG
 
-v0.0.1 initial version
+v0.1.0 version
 
 =cut
