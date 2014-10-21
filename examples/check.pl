@@ -1,11 +1,11 @@
 #!/usr/bin/env perl
 
-use SQL::dbh;
+use SQL::Audit::dbh;
 use Data::Dumper;
-use SQL::Check qw(_nondeter_clause _unsafe_parse _function_in_filter);
-use SQL::Log::Record;
+use SQL::Audit::Check qw(_nondeter_clause _unsafe_parse _function_in_filter);
+use SQL::Audit::Log::Record;
 use encoding "utf8";
-my $dblist = SQL::dbh->new(
+my $dblist = SQL::Audit::dbh->new(
     host => '127.0.0.1',
     port => 3306,
     user => 'test',
@@ -14,7 +14,7 @@ my $dblist = SQL::dbh->new(
     driver   => 'mysql',
 );
 
-my $log = SQL::Log::Record->new(
+my $log = SQL::Audit::Log::Record->new(
     'file' => './log/audit.log',
     'mode'     => '>>',
     'screen'   => 1,
@@ -28,7 +28,7 @@ my $db_handle = $dblist->get_dbh('test',{AutoCommit => 1});
 my $sql = "select * from t2 where name like '%rzs%'";
 my @message;
 push @message, "Query: $sql";
-my $x = SQL::Check->new();
+my $x = SQL::Audit::Check->new();
 if ( $x->check_table('dbh'=>$db_handle, 'table'=>'t2') ) {
    push @message, $x->get_recommend($sql);
    my $row = $x->get_table_status($db_handle, 't2');

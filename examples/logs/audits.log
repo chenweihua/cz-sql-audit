@@ -1,2 +1,5 @@
 2014-10-15T20:42:32 - [debug] master status - slave status
 2014-10-15T20:42:32 - [error] hello world
+2014-10-21T10:33:29 - [info] Date: 2014-10-21T10:33:21 - Client: 10.0.0.100 - Thread: 296782 - Database: test - Query: select * from t2 where years <= 10 limit 20,100
+2014-10-21T10:33:29 - [warning] Engine: MyISAM
+2014-10-21T10:33:29 - [warning] index: ALL

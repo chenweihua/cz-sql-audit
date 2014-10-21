@@ -2,9 +2,9 @@
 use Data::Dumper;
 use strict;
 use warnings;
-use SQL::Log::Record;
+use SQL::Audit::Log::Record;
 
-my $log = SQL::Log::Record->new(
+my $log = SQL::Audit::Log::Record->new(
     'filename' => './logs/audits.log',
     'mode'     => '>>',
 );
