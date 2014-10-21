@@ -186,6 +186,7 @@ Example:
 
 Both send and send_smtp does not check whether it send ok or not. So, client can not recieve
 message when mail command or mail server is not ok, attach file is not supported.
+Old CentOS or RedHat, such as 5.5 does not support -r options in mail command,
 
 =head1 CONSTRUCTOR
 

@@ -33,6 +33,7 @@ perldoc SQL::Audit::Rewrite
 perldoc SQL::Audit::Explain
 perldoc SQL::Audit::Check
 perldoc SQL::Audit::Log::Record
+perldoc SQL::Audit::Email::Send
 
 COPYRIGHT AND LICENCE
 
