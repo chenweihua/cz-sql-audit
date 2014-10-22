@@ -236,14 +236,14 @@ sub query_statistic {
     print $query,"\n";
     $query =~ s{
                   \s*?((?:(?:=|<|<=|>|>=|LIKE)))\s*?
-                  (?:'\S+?'|"\S+?"|\d+)\s*?
+                  (?:'.*?'|".*?"|\d+)\s*?
                }
                {   
                   _stat_comp($1)
                }gmexsi;
 
      $query =~ s{
-                   (\s*?BETWEEN\s*?\S+?\s*?AND\s*?\S+)
+                   (\s*?BETWEEN\s*?(?:'.*?'|".*?"|\d+)\s*?AND\s*?(?:'.*?'|".*?"|\d+)\s*?)
                 }
                 {   
                    _stat_range($1)
@@ -252,7 +252,7 @@ sub query_statistic {
      $query =~ s{
                    \s+?((?:IN|VALUES))\s*
                    \(
-                    \s*?(?:\d+|'\S+?'|"\S+?")\s*?,.*?
+                    \s*?(?:\d+|'.*?'|".*?")\s*?,.*?
                    \)
                }
                {   
@@ -263,7 +263,7 @@ sub query_statistic {
                    \bLIMIT\b\s*?
                    \d+\s*?(?:,\s*?\d+|)
                 }
-                {
+                {   
                    _stat_limit()
                 }gmexsi;
 
