@@ -175,7 +175,6 @@ sub sub_query_wrap {
     my ( $self, $query ) = @_;
     return unless $query;
 
-    print "Query:$query\n";
     return $query =~ m/\A\s*select/sxi
                   ? "SELECT 1 FROM ($query) AS x LIMIT 1"
                   : $query;
@@ -233,7 +232,6 @@ sub _short {
 # replace parameter with ?, for the memcached/redis cached.
 sub query_statistic {
     my($self, $query) = @_; 
-    print $query,"\n";
     $query =~ s{
                   \s*?((?:(?:=|<|<=|>|>=|LIKE)))\s*?
                   (?:'.*?'|".*?"|\d+)\s*?
@@ -277,7 +275,6 @@ sub _stat_comp {
 
 sub _stat_range {
     my $mark = shift;
-    print "mark: $mark\n";
     return " BETWEEN ? AND ?";
 }
 
