@@ -236,23 +236,23 @@ sub query_statistic {
     print $query,"\n";
     $query =~ s{
                   \s*?((?:(?:=|<|<=|>|>=|LIKE)))\s*?
-                  (?:'\w+?'|"\w+?"|\d+)\s*?
+                  (?:'\S+?'|"\S+?"|\d+)\s*?
                }
                {   
                   _stat_comp($1)
                }gmexsi;
 
      $query =~ s{
-                   (\s*?BETWEEN\s*?\w+?\s*?AND\s*?\w+)
+                   (\s*?BETWEEN\s*?\S+?\s*?AND\s*?\S+)
                 }
-                {
+                {   
                    _stat_range($1)
                 }gmexsi;
 
      $query =~ s{
                    \s+?((?:IN|VALUES))\s*
                    \(
-                    \s*?(?:\d+|'.*?'|".*?")\s*?,.*?
+                    \s*?(?:\d+|'\S+?'|"\S+?")\s*?,.*?
                    \)
                }
                {   

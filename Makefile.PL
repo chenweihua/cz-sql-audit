@@ -11,6 +11,7 @@ WriteMakefile(
     VERSION_FROM      => 'lib/SQL/Audit.pm',
     PREREQ_PM         => {
            "DBI" => 0,
+           "DBD::mysql"    => 0,
            "Log::Dispatch" => 0,
            "Authen::SASL"  => 0,
     },
