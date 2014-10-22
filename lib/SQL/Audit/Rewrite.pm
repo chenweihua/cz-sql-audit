@@ -143,7 +143,7 @@ sub _insert_to_select {
     my @cols = split(/,/,$cols);
     PTDEBUG && _debug('cols:', @cols);
 
-    $vals =~ s/^\(|\)$//g; # Strip leading/trailling parens
+    $vals =~ s/^\(|\)$//smg; # Strip leading/trailling parens
     my @vals = $vals =~ m/($quote_re|[^,]*${np}[^,]*|[^,]+)/g;
     PTDEBUG && _debug('vals:', @vals);
 
@@ -157,15 +157,15 @@ sub _insert_to_select {
 
 sub _insert_to_select_set {
     my ( $from, $set ) = @_;
-    $set =~ s/,/ AND /g;
+    $set =~ s/,/ AND /smgg;
     return "SELECT * FROM $from WHERE $set";
 }
 
 sub _update_to_select {
     my ( $from, $set, $where, $limit ) = @_;
 
-    #set book_id = 1002, name = "list"
-    $set =~ s/\s*?=\s*?[^,]+(?:\s*?)//g;
+    #set book_id = 1002, name = "list, list"
+    $set =~ s/\s*?=\s*?(?:'.*?'|".*"|\d+)//smg;
     return "SELECT $set FROM $from "
            . ( $where ? "WHERE $where" : '' )
            . ( $limit ? " $limit "     : '' );
