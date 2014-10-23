@@ -264,7 +264,9 @@ sub _nondeter_clause {
              }   
         };  
         $query !~ m/\bWHERE\b/sxi && do {
-             push @msg, $unsafe_clause{'WHERE'};
+             if ( $query !~ m/^\s*\bINSERT\b\s*/sxi ){
+                 push @msg, $unsafe_clause{'WHERE'};
+             }   
         };
     }
 
