@@ -91,13 +91,14 @@ sub convert_to_select {
            || $query =~ s{
                           \A.*?
                           (?:insert(?:\s+ignore)?|replace)\s+
-                          .*?\binto\b(.*?)\(([^\)]+)\)\s*
+                          .*?\binto\b(.*?)(\([^\)]+\))??\s*
                           values?\s*(\(.*?\))\s*
                           (?:\blimit\b|on\s+duplicate\s+key.*)?\s*
                           \Z
                          }
                          {
-                          _insert_to_select($1, $2, $3)
+                          defined $2 ? _insert_to_select($1, $2, $3)
+                                     : return "SELECT * FROM $1 LIMIT 1"
                          }exsi
            || $query =~ s{
                           \A.*?
@@ -140,6 +141,7 @@ sub _insert_to_select {
     my ( $tb1, $cols, $vals ) = @_;
     PTDEBUG && _debug('args:', @_);
 
+    $cols =~ s/(?:\(|\))//g;
     my @cols = split(/,/,$cols);
     PTDEBUG && _debug('cols:', @cols);
 
