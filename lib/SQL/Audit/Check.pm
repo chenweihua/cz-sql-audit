@@ -177,6 +177,7 @@ my @unsafe_function = qw(
     UUID_SHORT
 );
 
+# maybe detect error, such as insert into user(c1,c2) values( .. )
 sub _unsafe_parse {
     my ( $query ) = @_;
     unless ($query) {
