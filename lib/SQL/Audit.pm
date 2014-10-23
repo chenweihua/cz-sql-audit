@@ -99,7 +99,8 @@ sub sql_explain {
         }
     }
 
-    return (\@msg, $explain);
+    @msg + 0 > 0 ? return (\@msg, $explain)
+                 : return;
 }
 
 sub sql_fuzzy {
