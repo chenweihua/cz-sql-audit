@@ -234,9 +234,10 @@ sub _short {
 # replace parameter with ?, for the memcached/redis cached.
 sub query_statistic {
     my($self, $query) = @_; 
+    $query =~ s{\\(?:\'|\")}{}mgi;
     $query =~ s{
                   \s*?((?:(?:=|<|<=|>|>=|LIKE)))\s*?
-                  (?:'.*?'|".*?"|\d+)\s*?
+                  ((?:null|'.*?'|".*?"|[\d.]+))\s*?
                }
                {   
                   _stat_comp($1)
