@@ -237,7 +237,7 @@ sub query_statistic {
     $query =~ s{\\(?:\'|\")}{}mgi;
     $query =~ s{
                   \s*?((?:(?:=|<|<=|>|>=|LIKE)))\s*?
-                  ((?:null|'.*?'|".*?"|[\d.]+))\s*?
+                  (?:null|'.*?'|".*?"|[\d.]+)\s*?
                }
                {   
                   _stat_comp($1)
