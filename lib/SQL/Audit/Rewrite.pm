@@ -251,7 +251,7 @@ sub query_statistic {
                 }gmexsi;
 
      $query =~ s{
-                   \s+?((?:IN|VALUES))\s*
+                   \s+?((?:IN))\s*
                    \(
                      \s*?(?:null|[\d.]+|'.*?'|".*?")\s*?,.*?
                    \)
@@ -259,6 +259,14 @@ sub query_statistic {
                {   
                     _stat_in($1)
                }gmexsi;
+
+     $query =~ s{
+                   \s+?((?:VALUES))\s*
+                   (\(\s*?(?:null|[\d.]+?|'.*?'|".*?")\s*?,.*?\)).*
+                }
+                {   
+                  _stat_value($1,$2);
+                }gmexsi;
 
      $query =~ s{
                    \bLIMIT\b\s*?
@@ -284,6 +292,11 @@ sub _stat_range {
 sub _stat_in {
     my $mark = shift;
     return " $mark ( ? )"
+}
+
+sub _stat_value {
+    my $mark = shift @_;
+    return  "$mark (?),... (?) ";
 }
 
 sub _stat_limit {
